@@ -24,7 +24,7 @@ GugaLauncher 使用 C# 開發，負責啟動前檢查與程序協調；mod 的�
 「個人研究」描述本專案的開發目的，「免費提供」描述作者的發布方式，**不新增禁止商用、販售或再散布的限制**，亦不縮減既有授權授予的權利。遊戲素材、商標、圖示與 mod 不因本工具的授權而取得再授權。
 
 > [!NOTE]
-> 此倉庫提供原始碼與腳本，不包含已編譯程式或 .NET Runtime。一般玩家請下載 GitHub Releases 中的完整 ZIP，再依下列步驟設定；不要直接執行原始碼倉庫中的啟動腳本。
+> 此倉庫提供原始碼與腳本，不包含已編譯執行檔或 .NET Runtime。一般玩家請下載 GitHub Releases 的完整 ZIP，並依包內 README 操作。若要測試此原始碼版本，請先依[建置說明](docs/repository-layout.md)完成建置，再執行 Setup.cmd。日常使用生成的 GugaEFMI 捷徑，scripts/Start.cmd 為備用入口。
 
 ## 使用前準備
 
@@ -124,19 +124,23 @@ PowerShell、管理員權限、未簽章檔案，以及原版 EFMI 用來載入 
 | 搬動了 GugaLauncher 資料夾 | 重新執行 Setup，更新 XXMI 命令並重新生成捷徑 |
 | 視窗顯示錯誤 | 保留完整訊息供排查；提供日誌前先遮蔽個人路徑與帳號資訊 |
 
+## 原始碼倉庫結構
+
+請參閱[目錄與建置說明](docs/repository-layout.md)及[技術說明](docs/technical-notes.md)。下方檔案表涵蓋原始碼檔案與建置、設定後產生的內容。目前原始碼使用 scripts/Start.cmd 與 scripts/Offline-Tests.cmd；已發布 ZIP 可能採用不同結構，請依該包隨附的 README 操作。
+
 ## 檔案用途與隱私
 
 | 檔案／資料夾 | 用途 |
 | --- | --- |
 | `Setup.cmd` | 首次設定、按 Enter 重查、生成捷徑 |
 | `GugaEFMI.lnk` | 設定成功後產生的日常啟動捷徑 |
-| `Start.cmd` | 相同協同流程的備用啟動入口 |
+| `scripts/Start.cmd` | 相同協同流程的備用啟動入口 |
 | `Instructions.cmd` | 重新顯示設定指引與命令 |
 | `Check.cmd` | 只檢查，不啟動遊戲 |
-| `Offline-Tests.cmd` | 開發／排查使用的離線測試，不是啟動入口 |
-| `app/` | 程式及隨附 .NET Runtime；請整個保留 |
+| `scripts/Offline-Tests.cmd` | 開發／排查使用的離線測試，不是啟動入口 |
+| `app/` | 倉庫僅收錄空白設定範本；建置後在此產生程式與 Runtime |
 | `src/` | C# 原始碼 |
-| `PACKAGE-MANIFEST.json` | 初始交付檔案的 SHA256 清單；不是數位簽章 |
+| `PACKAGE-MANIFEST.json` | 打包時產生的相對路徑、大小與 SHA256 清單；不納入此倉庫，也不是數位簽章 |
 | `LICENSE`、`runtime-licenses/` | 授權與第三方聲明 |
 
 乾淨交付包不包含玩家路徑、帳號、mod、日誌或已設定的捷徑。首次設定後產生的 `app/settings.json`、設定備份、`app/local-errors.log` 與捷徑可能包含本機路徑，**分享時請使用原始交付 ZIP，不要直接壓縮已使用的資料夾**。
@@ -145,7 +149,7 @@ GugaLauncher 不搬移原版 Mods；原版 XXMI／EFMI 仍會依自身設定進�
 
 ## 適用範圍
 
-協同啟動與注入流程已完成本機實測，使用者確認遊戲與 mod 正常。後續的視窗退出、設定提示與捷徑生成已做離線或隔離驗證；這不代表所有電腦、遊戲更新或 XXMI 版本均已驗收。
+相容性取決於遊戲、啟動器、XXMI／EFMI、mod 與系統環境。離線檢查不能取代遊戲內驗證，不保證適用所有電腦或未來版本。
 
 本工具的防重複檢查只涵蓋自己的協同入口。原版 XXMI 的行為沒有被修改；直接使用其他入口，或在啟動途中同時從其他程式啟動遊戲，仍可能繞過檢查。啟動時請只使用一個入口。
 

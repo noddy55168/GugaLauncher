@@ -109,7 +109,7 @@ internal sealed class WindowsHost(Settings settings) : ICoordinatorHost, IDispos
         string name=Environment.GetEnvironmentVariable("GUGA_COORD_PIPE")??"";
         string token=Environment.GetEnvironmentVariable("GUGA_COORD_NONCE")??"";
         if(!name.StartsWith("GugaLauncher-",StringComparison.Ordinal)||name.Length>80||token.Length!=64)
-            throw new InvalidOperationException("缺少前置檢查會話。請從本版 Start.cmd 啟動，不要直接按原版啟動鈕。");
+            throw new InvalidOperationException("缺少前置檢查會話。請從本版 GugaEFMI 捷徑啟動，不要直接按原版啟動鈕。");
         using var pipe=new NamedPipeClientStream(".",name,PipeDirection.InOut,PipeOptions.Asynchronous|PipeOptions.CurrentUserOnly);
         using var timeout=new CancellationTokenSource(TimeSpan.FromSeconds(10));
         pipe.ConnectAsync(timeout.Token).GetAwaiter().GetResult();
