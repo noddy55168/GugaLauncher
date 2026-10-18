@@ -24,7 +24,7 @@ GugaLauncher 使用 C# 開發，負責啟動前檢查與程序協調；mod 的�
 「個人研究」描述本專案的開發目的，「免費提供」描述作者的發布方式，**不新增禁止商用、販售或再散布的限制**，亦不縮減既有授權授予的權利。遊戲素材、商標、圖示與 mod 不因本工具的授權而取得再授權。
 
 > [!NOTE]
-> 此倉庫提供原始碼與腳本，不包含已編譯程式或 .NET Runtime。一般玩家請下載 GitHub Releases 中的完整 ZIP，再依下列步驟設定；不要直接執行原始碼倉庫中的啟動腳本。
+> 此倉庫提供原始碼與腳本，不包含已編譯執行檔或 .NET Runtime。一般玩家請下載 GitHub Releases 的完整 ZIP，並依包內 README 操作。若要測試此原始碼版本，請先依[建置說明](docs/repository-layout.md)完成建置，再執行 Setup.cmd。日常使用生成的 GugaEFMI 捷徑，scripts/Start.cmd 為備用入口。
 
 ## 使用前準備
 
@@ -126,7 +126,7 @@ PowerShell、管理員權限、未簽章檔案，以及原版 EFMI 用來載入 
 
 ## 原始碼倉庫結構
 
-請參閱[目錄與建置說明](docs/repository-layout.md)。輔助腳本收納於 scripts/，技術與來源說明統一收納於 [docs/technical-notes.md](docs/technical-notes.md)。下方檔案表描述已發布的 v0.1.0 ZIP，其結構維持不變；本倉庫的離線測試入口則為 scripts/Offline-Tests.cmd。 本倉庫的備用啟動入口已收納至 scripts/Start.cmd；首次使用請執行 Setup.cmd，日常使用生成的 GugaEFMI 捷徑。
+請參閱[目錄與建置說明](docs/repository-layout.md)及[技術說明](docs/technical-notes.md)。下方檔案表涵蓋原始碼檔案與建置、設定後產生的內容。目前原始碼使用 scripts/Start.cmd 與 scripts/Offline-Tests.cmd；已發布 ZIP 可能採用不同結構，請依該包隨附的 README 操作。
 
 ## 檔案用途與隱私
 
@@ -134,13 +134,13 @@ PowerShell、管理員權限、未簽章檔案，以及原版 EFMI 用來載入 
 | --- | --- |
 | `Setup.cmd` | 首次設定、按 Enter 重查、生成捷徑 |
 | `GugaEFMI.lnk` | 設定成功後產生的日常啟動捷徑 |
-| `Start.cmd` | 相同協同流程的備用啟動入口 |
+| `scripts/Start.cmd` | 相同協同流程的備用啟動入口 |
 | `Instructions.cmd` | 重新顯示設定指引與命令 |
 | `Check.cmd` | 只檢查，不啟動遊戲 |
-| `Offline-Tests.cmd` | 開發／排查使用的離線測試，不是啟動入口 |
-| `app/` | 程式及隨附 .NET Runtime；請整個保留 |
+| `scripts/Offline-Tests.cmd` | 開發／排查使用的離線測試，不是啟動入口 |
+| `app/` | 倉庫僅收錄空白設定範本；建置後在此產生程式與 Runtime |
 | `src/` | C# 原始碼 |
-| `PACKAGE-MANIFEST.json` | 初始交付檔案的 SHA256 清單；不是數位簽章 |
+| `PACKAGE-MANIFEST.json` | 打包時產生的相對路徑、大小與 SHA256 清單；不納入此倉庫，也不是數位簽章 |
 | `LICENSE`、`runtime-licenses/` | 授權與第三方聲明 |
 
 乾淨交付包不包含玩家路徑、帳號、mod、日誌或已設定的捷徑。首次設定後產生的 `app/settings.json`、設定備份、`app/local-errors.log` 與捷徑可能包含本機路徑，**分享時請使用原始交付 ZIP，不要直接壓縮已使用的資料夾**。

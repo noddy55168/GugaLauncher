@@ -24,7 +24,7 @@ GugaLauncher 使用 C# 开发，负责启动前检查与进程协调；mod 的�
 “个人研究”描述本项目的开发目的，“免费提供”描述作者的发布方式，**不新增禁止商用、销售或再分发的限制**，也不缩减现有许可授予的权利。游戏素材、商标、图标与 mod 不因本工具的许可而获得再许可。
 
 > [!NOTE]
-> 此仓库提供源代码与脚本，不包含已编译程序或 .NET Runtime。一般玩家请下载 GitHub Releases 中的完整 ZIP，再按下列步骤设置；不要直接运行源代码仓库中的启动脚本。
+> 此仓库提供源代码与脚本，不包含已编译的可执行文件或 .NET Runtime。一般玩家请下载 GitHub Releases 的完整 ZIP，并按包内 README 操作。若要测试此源代码版本，请先按照[构建说明](docs/repository-layout.md)完成构建，再运行 Setup.cmd。日常使用生成的 GugaEFMI 快捷方式，scripts/Start.cmd 为备用入口。
 
 ## 使用前准备
 
@@ -126,7 +126,7 @@ PowerShell、管理员权限、未签名文件，以及原版 EFMI 用于加载 
 
 ## 源代码仓库结构
 
-请参阅[目录与构建说明](docs/repository-layout.md)。辅助脚本位于 scripts/，技术与来源说明统一收录于 [docs/technical-notes.md](docs/technical-notes.md)。下方文件表描述已发布的 v0.1.0 ZIP，其结构保持不变；本仓库的离线测试入口为 scripts/Offline-Tests.cmd。 本仓库的备用启动入口已移至 scripts/Start.cmd；首次使用请运行 Setup.cmd，日常使用生成的 GugaEFMI 快捷方式。
+请参阅[目录与构建说明](docs/repository-layout.md)及[技术说明](docs/technical-notes.md)。下方文件表涵盖源代码文件与构建、设置后生成的内容。当前源代码使用 scripts/Start.cmd 与 scripts/Offline-Tests.cmd；已发布 ZIP 可能采用不同结构，请按该包附带的 README 操作。
 
 ## 文件用途与隐私
 
@@ -134,13 +134,13 @@ PowerShell、管理员权限、未签名文件，以及原版 EFMI 用于加载 
 | --- | --- |
 | `Setup.cmd` | 首次设置、按 Enter 重新检查、生成快捷方式 |
 | `GugaEFMI.lnk` | 设置成功后生成的日常启动快捷方式 |
-| `Start.cmd` | 相同协同流程的备用启动入口 |
+| `scripts/Start.cmd` | 相同协同流程的备用启动入口 |
 | `Instructions.cmd` | 重新显示设置指引与命令 |
 | `Check.cmd` | 只检查，不启动游戏 |
-| `Offline-Tests.cmd` | 开发／排查使用的离线测试，不是启动入口 |
-| `app/` | 程序及随附的 .NET Runtime；请完整保留 |
+| `scripts/Offline-Tests.cmd` | 开发／排查使用的离线测试，不是启动入口 |
+| `app/` | 仓库仅包含空白设置模板；构建后在此生成程序与 Runtime |
 | `src/` | C# 源代码 |
-| `PACKAGE-MANIFEST.json` | 初始发布文件的 SHA256 清单；不是数字签名 |
+| `PACKAGE-MANIFEST.json` | 打包时生成的相对路径、大小与 SHA256 清单；不纳入此仓库，也不是数字签名 |
 | `LICENSE`、`runtime-licenses/` | 许可与第三方声明 |
 
 干净的发布包不包含玩家路径、账号、mod、日志或已配置的快捷方式。首次设置后生成的 `app/settings.json`、设置备份、`app/local-errors.log` 与快捷方式可能包含本机路径，**分享时请使用原始发布 ZIP，不要直接压缩已使用的文件夹**。
