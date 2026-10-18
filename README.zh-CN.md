@@ -126,7 +126,7 @@ PowerShell、管理员权限、未签名文件，以及原版 EFMI 用于加载 
 
 ## 源代码仓库结构
 
-请参阅[目录与构建说明](docs/repository-layout.md)。辅助脚本位于 scripts/，技术与来源说明统一收录于 [docs/technical-notes.md](docs/technical-notes.md)。下方文件表描述已发布的 v0.1.0 ZIP，其结构保持不变；本仓库的离线测试入口为 scripts/Offline-Tests.cmd。
+请参阅[目录与构建说明](docs/repository-layout.md)。辅助脚本位于 scripts/，技术与来源说明统一收录于 [docs/technical-notes.md](docs/technical-notes.md)。下方文件表描述已发布的 v0.1.0 ZIP，其结构保持不变；本仓库的离线测试入口为 scripts/Offline-Tests.cmd。 本仓库的备用启动入口已移至 scripts/Start.cmd；首次使用请运行 Setup.cmd，日常使用生成的 GugaEFMI 快捷方式。
 
 ## 文件用途与隐私
 

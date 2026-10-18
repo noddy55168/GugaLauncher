@@ -12,13 +12,13 @@ README.zh-TW.md             繁體中文
 README.zh-CN.md             简体中文
 LICENSE                    Existing GPLv3 license (unchanged)
 Setup.cmd                  Initial setup entry
-Start.cmd                  Coordinated launch entry
 Check.cmd                  Read-only configuration/process check
 Instructions.cmd           Display configuration instructions
 app/
   settings.template.json   Blank template; generated application files are ignored
 src/                       C# application sources and project
 scripts/
+  Start.cmd                Backup launch entry; normally use GugaEFMI
   Setup.ps1                Setup orchestration
   QuickStart.ps1           Elevation and coordinated launch
   New-GugaShortcut.ps1     Generate the local GugaEFMI shortcut
@@ -29,9 +29,9 @@ docs/
   technical-notes.md       Technical boundaries, provenance and validation scope
 ```
 
-The duplicate English README is consolidated into README.md. The duplicate EFMI Quick Start.cmd wrapper is consolidated into Start.cmd. The original XXMI shortcut is not part of this repository and is not modified.
+The duplicate English README is consolidated into README.md. The duplicate EFMI Quick Start.cmd wrapper is consolidated into scripts/Start.cmd. The original XXMI shortcut is not part of this repository and is not modified.
 
-英文文件統一使用 README.md；重複的 EFMI Quick Start.cmd 合併為 Start.cmd。這不是修改玩家原版 XXMI 的 EFMI Quick Start 捷徑。
+英文文件統一使用 README.md；重複的 EFMI Quick Start.cmd 合併為 scripts/Start.cmd。這不是修改玩家原版 XXMI 的 EFMI Quick Start 捷徑。
 
 ## Build / 建置
 
@@ -55,13 +55,13 @@ After building, the offline tests can be run without starting the game:
 .\scripts\Offline-Tests.cmd
 ```
 
-Setup.cmd and Start.cmd are live user workflows, not offline tests. They are not run as part of this structural cleanup.
+Setup.cmd and scripts/Start.cmd are live user workflows, not offline tests. They are not run as part of this structural cleanup.
 
-Setup.cmd 與 Start.cmd 是實際使用入口，不是離線測試；本次結構整理沒有執行它們。
+Setup.cmd 與 scripts/Start.cmd 是實際使用入口，不是離線測試；本次結構整理沒有執行它們。
 
 ## Path contract / 路徑規則
 
-- Root CMD entry points locate scripts relative to their own file location.
+- Root CMD entry points locate scripts relative to their own file location. The backup scripts/Start.cmd calls QuickStart.ps1 in the same folder.
 - PowerShell helpers derive the repository root from the parent of scripts/; the current working directory does not determine the app location.
 - Setup passes that root to the shortcut generator. The shortcut and icon remain at the root, and the shortcut targets scripts/QuickStart.ps1.
 - app/settings.json and logs remain beside the application executable; the C# implementation is unchanged.

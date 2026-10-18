@@ -126,7 +126,7 @@ PowerShell、管理員權限、未簽章檔案，以及原版 EFMI 用來載入 
 
 ## 原始碼倉庫結構
 
-請參閱[目錄與建置說明](docs/repository-layout.md)。輔助腳本收納於 scripts/，技術與來源說明統一收納於 [docs/technical-notes.md](docs/technical-notes.md)。下方檔案表描述已發布的 v0.1.0 ZIP，其結構維持不變；本倉庫的離線測試入口則為 scripts/Offline-Tests.cmd。
+請參閱[目錄與建置說明](docs/repository-layout.md)。輔助腳本收納於 scripts/，技術與來源說明統一收納於 [docs/technical-notes.md](docs/technical-notes.md)。下方檔案表描述已發布的 v0.1.0 ZIP，其結構維持不變；本倉庫的離線測試入口則為 scripts/Offline-Tests.cmd。 本倉庫的備用啟動入口已收納至 scripts/Start.cmd；首次使用請執行 Setup.cmd，日常使用生成的 GugaEFMI 捷徑。
 
 ## 檔案用途與隱私
 
