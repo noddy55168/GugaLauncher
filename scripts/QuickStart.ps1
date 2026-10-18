@@ -1,5 +1,7 @@
 ﻿# Quick Start 始終先進入協同前置檢查，不直接啟動 XXMI 或獨立 bridge。
 $ErrorActionPreference='Stop'
+# 腳本位於 scripts；應用程式與玩家設定仍位於專案根目錄的 app。
+$Root=Split-Path -Parent $PSScriptRoot
 [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)
 try {
  $identity=[Security.Principal.WindowsIdentity]::GetCurrent()
@@ -13,7 +15,7 @@ try {
  }
  Write-Host 'GugaEFMI | 正在檢查並啟動遊戲…' -ForegroundColor Cyan
  Write-Host '遊戲程序建立成功後，本視窗會自動關閉；mod 由原版 EFMI 載入。' -ForegroundColor DarkGray
- & (Join-Path $PSScriptRoot 'app\GugaLauncher.exe') start --live
+ & (Join-Path $Root 'app\GugaLauncher.exe') start --live
  # 只在成功結束時關閉；非零結束碼留住畫面，避免錯誤一閃而過。
  if($LASTEXITCODE -eq 0) { exit 0 }
  Write-Host '啟動未完成，請依上方訊息處理後再試。' -ForegroundColor Yellow

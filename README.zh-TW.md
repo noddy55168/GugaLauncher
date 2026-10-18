@@ -124,6 +124,10 @@ PowerShell、管理員權限、未簽章檔案，以及原版 EFMI 用來載入 
 | 搬動了 GugaLauncher 資料夾 | 重新執行 Setup，更新 XXMI 命令並重新生成捷徑 |
 | 視窗顯示錯誤 | 保留完整訊息供排查；提供日誌前先遮蔽個人路徑與帳號資訊 |
 
+## 原始碼倉庫結構
+
+請參閱[目錄與建置說明](docs/repository-layout.md)。輔助腳本收納於 scripts/，技術與來源說明統一收納於 [docs/technical-notes.md](docs/technical-notes.md)。下方檔案表描述已發布的 v0.1.0 ZIP，其結構維持不變；本倉庫的離線測試入口則為 scripts/Offline-Tests.cmd。
+
 ## 檔案用途與隱私
 
 | 檔案／資料夾 | 用途 |

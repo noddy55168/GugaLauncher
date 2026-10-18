@@ -124,6 +124,10 @@ Official references: [Windows UAC](https://learn.microsoft.com/en-us/windows/sec
 | GugaLauncher folder was moved | Run Setup again, update the XXMI command, and regenerate the shortcut |
 | An error appears | Retain the complete message; redact personal paths and account information before sharing logs |
 
+## Source repository layout
+
+See [repository layout and build instructions](docs/repository-layout.md). Helper scripts are under scripts/; technical notes are consolidated in [docs/technical-notes.md](docs/technical-notes.md). The file table below describes the published v0.1.0 ZIP, whose layout remains unchanged. In this source checkout, the offline test entry is scripts/Offline-Tests.cmd.
+
 ## Files and privacy
 
 | File or folder | Purpose |

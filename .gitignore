@@ -58,3 +58,9 @@ TestResults/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Local validation records (all folders, case-insensitive filename)
+[Vv][Aa][Ll][Ii][Dd][Aa][Tt][Ii][Oo][Nn].[Tt][Xx][Tt]
+
+# Original local documentation records; not for publication
+/.local-docs/

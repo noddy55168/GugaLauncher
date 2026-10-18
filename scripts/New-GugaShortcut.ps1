@@ -8,7 +8,7 @@ if($SetupExitCode -ne 0) { return }
 $Root=[IO.Path]::GetFullPath($Root)
 $config=Get-Content -LiteralPath (Join-Path $Root 'app\settings.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $sourceIcon=Join-Path $config.XxmiFolder 'Themes\Default\Shortcuts\EFMI.ico'
-$launcher=Join-Path $Root 'QuickStart.ps1'
+$launcher=Join-Path $Root 'scripts\QuickStart.ps1'
 $icon=Join-Path $Root 'GugaEFMI.ico'
 $link=Join-Path $Root 'GugaEFMI.lnk'
 foreach($file in @($sourceIcon,$launcher)) {
