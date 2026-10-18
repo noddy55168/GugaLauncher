@@ -1,6 +1,6 @@
 # GugaLauncher — GugaEFMI 使用说明
 
-[繁體中文](README.md) | 简体中文 | [English](README.en.md)
+[English](README.md) | [繁體中文](README.zh-TW.md) | 简体中文
 
 GugaLauncher 的设计目的，是将原本需要手动操作 **XXMI／EFMI 与官方 GRYPHLINK 启动器**的步骤简化，整合成一键启动流程。
 

@@ -1,6 +1,6 @@
 GugaLauncher C# — Technical and Historical Supplement (English)
 
-For current player instructions, read README.en.md (English) or README.md (Traditional Chinese). README.txt preserves earlier Chinese notes. Older references there to manual administrator launch or EFMI Quick Start.cmd are historical; the current recommended entry point is the generated GugaEFMI shortcut.
+For current player instructions, read README.en.md (English) or README.zh-TW.md (Traditional Chinese). README.txt preserves earlier Chinese notes. Older references there to manual administrator launch or EFMI Quick Start.cmd are historical; the current recommended entry point is the generated GugaEFMI shortcut.
 
 This English companion summarizes the technical and historical material in README.txt. Current setup steps and all user-facing notices are translated in full in README.en.md.
 

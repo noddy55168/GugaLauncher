@@ -1,6 +1,6 @@
 # GugaLauncher — GugaEFMI User Guide
 
-[繁體中文](README.md) | [简体中文](README.zh-CN.md) | English
+English | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md)
 
 GugaLauncher simplifies the manual steps needed to operate **XXMI/EFMI and the official GRYPHLINK launcher**, combining them into a one-click launch workflow.
 

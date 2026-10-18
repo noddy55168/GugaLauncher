@@ -1,151 +1,150 @@
-# GugaLauncher — GugaEFMI 使用說明
+# GugaLauncher — GugaEFMI User Guide
 
-繁體中文 | [简体中文](README.zh-CN.md) | [English](README.en.md)
+English | [繁體中文](README.zh-TW.md) | [简体中文](README.zh-CN.md)
 
-GugaLauncher 的設計目的，是將原本需要手動操作 **XXMI／EFMI 與官方 GRYPHLINK 啟動器**的步驟簡化，整合成一鍵啟動流程。
+GugaLauncher simplifies the manual steps needed to operate **XXMI/EFMI and the official GRYPHLINK launcher**, combining them into a one-click launch workflow.
 
-完成首次設定後，只要雙擊 **GugaEFMI**，並在 Windows 要求時核准管理員權限，工具就會自動協調官方啟動器與原版 XXMI／EFMI，啟動終末地並交由 EFMI 載入 mod，減少每次遊玩前的重複操作。
+After initial setup, double-click **GugaEFMI** and approve the Windows administrator prompt when requested. The tool coordinates the official launcher and the original XXMI/EFMI to start Endfield, leaving mod loading to EFMI.
 
-GugaLauncher 使用 C# 開發，負責啟動前檢查與程序協調；mod 的準備與注入仍由原版 XXMI／EFMI 處理。本工具不包含遊戲、XXMI、EFMI 或 mod，亦非遊戲官方啟動器。
+GugaLauncher is written in C# and handles pre-launch checks and process coordination. The original XXMI/EFMI still prepares and injects mods. This tool does not include the game, XXMI, EFMI, or mods, and is not an official game launcher.
 
 > [!CAUTION]
-> **GugaLauncher 是非官方的個人研究專案，由作者免費提供**，旨在簡化 XXMI／EFMI 與官方啟動器的手動操作，實現一鍵協同啟動。
+> **GugaLauncher is an unofficial personal research project provided free of charge by its author.** It simplifies the manual steps involved in using XXMI/EFMI and the official launcher into a one-click coordinated workflow.
 >
-> 本專案與《明日方舟：終末地》的開發商、發行商，以及 GRYPHLINK、XXMI／EFMI 專案均無隸屬關係，亦未獲其官方背書。
+> This project is not affiliated with or officially endorsed by the developers or publishers of Arknights: Endfield, or by the GRYPHLINK or XXMI/EFMI projects.
 >
-> 本工具按現況提供，**不保證與目前或未來版本的遊戲、官方啟動器、XXMI／EFMI 或 mod 相容**，也不承諾持續維護或技術支援。既有測試成功不代表所有環境均可正常運作，也不代表獲得官方允許。
+> The tool is provided as is. **Compatibility with current or future versions of the game, official launcher, XXMI/EFMI, or mods is not guaranteed.** There is no commitment to continued maintenance or technical support. Successful testing does not guarantee operation in every environment or imply official approval.
 >
-> 請使用合法取得的遊戲客戶端。遊戲內容、商標、圖示、第三方工具及 mod 的權利均屬各自權利人；本專案不授予這些內容的使用或再散布權利，使用時仍須遵守其各自的授權與適用條款。
+> Use a legally obtained game client. Game content, trademarks, icons, third-party tools, and mods belong to their respective rights holders. This project grants no rights to use or redistribute those materials; their respective licenses and applicable terms still apply.
 
-## 授權與第三方權利
+## Licensing and third-party rights
 
-本專案維持現有授權，詳見隨附的 `LICENSE`；第三方程式與 .NET Runtime 保留各自的授權及著作權聲明，詳見 `runtime-licenses/` 與各專案文件。
+The project's existing license remains unchanged; see the included `LICENSE`. Third-party software and the .NET Runtime retain their own licenses and copyright notices; see `runtime-licenses/` and the respective project documentation.
 
-「個人研究」描述本專案的開發目的，「免費提供」描述作者的發布方式，**不新增禁止商用、販售或再散布的限制**，亦不縮減既有授權授予的權利。遊戲素材、商標、圖示與 mod 不因本工具的授權而取得再授權。
+“Personal research” describes the project's development purpose, and “provided free of charge” describes the author's distribution policy. **These statements add no restrictions on commercial use, sale, or redistribution**, and do not reduce rights granted by the existing license. The tool's license does not relicense game assets, trademarks, icons, or mods.
 
 > [!NOTE]
-> 此倉庫提供原始碼與腳本，不包含已編譯程式或 .NET Runtime。一般玩家請下載 GitHub Releases 中的完整 ZIP，再依下列步驟設定；不要直接執行原始碼倉庫中的啟動腳本。
+> This repository contains source code and scripts, not compiled executables or the .NET Runtime. Players should download the complete ZIP from GitHub Releases before following the setup instructions below. Do not run launch scripts directly from the source checkout.
 
-## 使用前準備
+## Before you start
 
-- Windows 64 位元環境。
-- 已安裝終末地及官方 **GRYPHLINK** 啟動器。
-- 已安裝 **XXMI 2.4.9**，並完成 EFMI 與所需 mod 的準備。本版會檢查 XXMI 執行檔版本 `2.4.9.0`，其他版本目前不接受。
-- 啟動時可以核准 Windows 管理員權限提示。
+- 64-bit Windows.
+- Endfield and the official **GRYPHLINK** launcher installed.
+- **XXMI 2.4.9** installed, with EFMI and your desired mods already prepared. This release checks for executable version `2.4.9.0`; other versions are currently rejected.
+- Ability to approve Windows administrator prompts.
 
-交付包已包含 .NET Runtime，**不需要另外安裝 Python 或 .NET**。
+The package includes the .NET Runtime. **You do not need to install Python or .NET separately.**
 
-先將整個 ZIP 解壓到固定位置，再開始設定。不要直接在壓縮檔內執行，也不要只取出其中的 `.exe`。
+Extract the entire ZIP to a permanent location before setup. Do not run files inside the ZIP or extract only the executable.
 
-## 首次設定
+## Initial setup
 
-### 1. 輸入三個安裝資料夾
+### 1. Enter three installation folders
 
-雙擊主資料夾中的 **`Setup.cmd`**，在開啟的 PowerShell 視窗依序輸入：
+Double-click **`Setup.cmd`** in the main folder. Enter the following in the PowerShell window:
 
-| 項目 | 絕對路徑範例 | 如何確認位置 |
+| Item | Example absolute path | How to identify the folder |
 | --- | --- | --- |
-| XXMI | `C:\XXMI Launcher` | 包含 `Resources` 資料夾與 `XXMI Launcher Config.json`；執行檔位於 `Resources\Bin` |
-| 終末地 | `C:\Arknights Endfield` | 直接包含 `Endfield.exe` 的那一層 |
-| GRYPHLINK | `C:\GRYPHLINK` | 包含 `Launcher.exe` 與官方版本子資料夾 |
+| XXMI | `C:\XXMI Launcher` | Contains `Resources` and `XXMI Launcher Config.json`; the executable is under `Resources\Bin` |
+| Endfield | `C:\Arknights Endfield` | Directly contains `Endfield.exe` |
+| GRYPHLINK | `C:\GRYPHLINK` | Contains `Launcher.exe` and the official version subfolders |
 
-**以上只是範例，不是預設安裝位置。** 請填入自己的實際資料夾，不要選 `.exe`，也不要選 `Endfield_Data` 或 `Mods`。可從檔案總管複製完整路徑；包住路徑的雙引號可以保留。
+**These are examples, not default installation locations.** Enter your actual folders. Do not select an executable, `Endfield_Data`, or `Mods`. You can copy the full path from File Explorer; enclosing quotation marks may remain.
 
-輸入路徑時留空按 Enter 會取消。三個路徑通過檔案檢查後會自動儲存。
+Pressing Enter with an empty path cancels setup. Once all three paths pass the file checks, they are saved automatically.
 
-### 2. 依提示設定 XXMI
+### 2. Configure XXMI as instructed
 
-先保留設定視窗，開啟 XXMI、選擇 **EFMI**，再進入齒輪 **「设置」**。以下名稱對應 XXMI 中文介面。
+Keep the setup window open. Open XXMI, select **EFMI**, and open the gear icon **Settings (“设置”)**. The Chinese labels below match the XXMI interface used for this release; English descriptions explain their meaning.
 
-**「通用」→「启动设置」**
+Under **General (“通用”) → Launch settings (“启动设置”)**:
 
-1. 將「游戏启动」暫時選為「直接」。
-2. 把出現的「启动方式」設為 **Native**。
-3. 再將「游戏启动」改回 **「自定义」**。此時「启动方式」會隱藏，屬正常顯示行為。
-4. 將 GugaLauncher 設定視窗顯示的**整行命令**貼入「启动命令」。保留雙引號與最後的 `bridge`；不要改填 `Start.cmd` 或 `XXMI Launcher.exe`。
-5. 「游戏进程启动等待超时」填 **60** 或更大，單位為秒。
-6. 「自定义游戏进程可执行文件名称」維持**不勾選**，保留預設 `Endfield.exe`。
+1. Temporarily set game launch (“游戏启动”) to Direct (“直接”).
+2. Set the launch method (“启动方式”) that appears to **Native**.
+3. Change game launch back to **Custom (“自定义”)**. The launch-method field will disappear; this is expected.
+4. Paste the **entire command shown by the GugaLauncher setup window** into the launch-command field (“启动命令”). Keep the quotation marks and the final `bridge` argument. Do not substitute `Start.cmd` or `XXMI Launcher.exe`.
+5. Set the game-process launch timeout (“游戏进程启动等待超时”) to **60 seconds or more**.
+6. Leave the custom game-process executable name (“自定义游戏进程可执行文件名称”) **unchecked**, retaining `Endfield.exe`.
 
-其他頁籤請依下表設定：
+Configure the other tabs as follows:
 
-| 頁籤 | 欄位 | 設定 |
+| Tab | Field | Required setting |
 | --- | --- | --- |
-| EFMI | XXMI DLL 注入模式 | 選「注入」（英文 Direct） |
-| 启动器 | 自动更新 | 取消勾選 |
-| 高级 | 启动前命令、加载后命令、注入库 | 取消啟用；不必刪除原有文字 |
+| EFMI | XXMI DLL injection mode (“XXMI DLL 注入模式”) | Injection (“注入”; Direct in English) |
+| Launcher (“启动器”) | Automatic updates (“自动更新”) | Uncheck |
+| Advanced (“高级”) | Pre-launch command, post-load command, injection libraries (“启动前命令”, “加载后命令”, “注入库”) | Disable; existing text does not need to be deleted |
 
-XXMI 的遊戲資料夾須與第一步輸入的位置相同。以上是目前版本的相容性要求；GugaLauncher 不會代你改寫 XXMI 設定。
+XXMI's game folder must match the folder entered in step 1. These are the current compatibility requirements. GugaLauncher does not modify XXMI's settings for you.
 
-### 3. 按 Enter 檢查並完成
+### 3. Press Enter to check and finish
 
-1. 關閉 XXMI 設定視窗並**正常退出 XXMI**。若仍在系統匣，請從系統匣退出。
-2. 回到原本的 PowerShell 視窗，按 **Enter** 檢查。
-3. 若顯示問題，依提示修正後再次按 Enter；不必重輸三個路徑。輸入 `Q` 可取消檢查，已儲存路徑會保留。
-4. 顯示 **OK** 後，程式會在主資料夾自動建立 **`GugaEFMI.lnk`**，並套用終末地圖示。
-5. 按任意鍵結束設定視窗。
+1. Close XXMI's settings window and **exit XXMI normally**. If it remains in the system tray, exit it there.
+2. Return to the original PowerShell window and press **Enter**.
+3. If problems are reported, correct them and press Enter again. You do not need to re-enter the three paths. Enter `Q` to cancel the check; saved paths are retained.
+4. After **OK**, setup automatically creates **`GugaEFMI.lnk`** in the main folder and applies the Endfield icon.
+5. Press any key to close the setup window.
 
-捷徑圖示取自你安裝的 XXMI；找不到圖示時會提示缺少檔案，設定仍會保留。此流程**不修改原版 `EFMI Quick Start` 捷徑**。
+The shortcut icon comes from your installed XXMI. If it cannot be found, setup reports the missing file and retains your settings. This process **does not modify the original `EFMI Quick Start` shortcut**.
 
-## 日常啟動
+## Everyday use
 
-**確認遊戲與 XXMI 已正常退出 → 雙擊 `GugaEFMI` → 核准管理員提示 → 等待遊戲。**
+**Make sure the game and XXMI have exited normally → double-click `GugaEFMI` → approve the administrator prompt → wait for the game.**
 
-- 設定會保留，下次不必重跑 Setup。
-- 官方 GRYPHLINK 可以保持開啟；未開啟時工具會嘗試啟動它。若需要登入或更新，請先完成官方流程。
-- 要使用本版協同流程，請從 **GugaEFMI** 進入。原版 XXMI 可用來管理設定，但其「启动」按鈕與原版 EFMI Quick Start 不會建立本版所需的前置會話。
-- 若偵測到既有遊戲或 XXMI，本工具會停止並提示，不替你強制結束它們。
+- Settings are retained; you do not need to run Setup each time.
+- Official GRYPHLINK may remain open. If it is not running, the tool attempts to start it. Complete any official login or update requirements first.
+- Use **GugaEFMI** to enter this coordinated workflow. The original XXMI can manage settings, but its launch button and the original EFMI Quick Start do not establish the prerequisite session required by this release.
+- If an existing game or XXMI process is detected, the tool stops and reports it instead of forcibly ending it.
 
-### 為什麼會看到 PowerShell 與管理員提示？
+### Why do PowerShell windows and an administrator prompt appear?
 
-GugaEFMI 透過 PowerShell 啟動協同程式；目前協同流程需要管理員權限存取官方程序，因此會出現 Windows **UAC** 提示。
+GugaEFMI uses PowerShell to start the coordinator. The current workflow needs administrator privileges to access the official process, so Windows displays a **UAC** prompt.
 
-核准後，一般視窗會交接到管理員視窗並退出，因此可能短暫看到兩個視窗。**遊戲程序建立成功後，啟動視窗會自動關閉**；若失敗或取消提權，會保留訊息供閱讀。
+After approval, the regular window hands off to an administrator window and exits. You may briefly see two windows. **The launch window closes automatically after the game process has been created.** On failure or canceled elevation, messages remain available to read.
 
-視窗關閉代表程序建立流程完成，並不單獨證明 mod 已正常顯示；請以遊戲畫面確認。
+A closed window indicates that process creation has completed; it does not independently confirm that mods display correctly. Check the game itself.
 
-### 防毒出現警示時怎麼辦？
+### What if antivirus software displays a warning?
 
-PowerShell、管理員權限、未簽章檔案，以及原版 EFMI 用來載入 mod 的 DLL 注入行為，都可能引起安全軟體注意。但**不能僅因工具用途就認定所有警示都是誤報**。
+PowerShell, administrator privileges, unsigned files, and the DLL injection used by the original EFMI to load mods may attract security-software attention. **The tool's purpose alone does not establish that a warning is a false positive.**
 
-請確認檔案來源，記下偵測名稱與被攔截的檔案路徑；不確定時先停止並保留訊息。使用本工具不需要停用防毒，也不應將整個磁碟加入排除。
+Verify the file source and note the detection name and blocked file path. If uncertain, stop and retain the message. This tool does not require disabling antivirus protection or excluding an entire drive.
 
-相關官方說明：[Windows UAC](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration)、[Microsoft 檔案分析與疑似誤報提交](https://www.microsoft.com/en-us/wdsi/filesubmission/?persona=HomeUser)。本工具不會自動提交檔案。
+Official references: [Windows UAC](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration) and [Microsoft file analysis and suspected false-positive submissions](https://www.microsoft.com/en-us/wdsi/filesubmission/?persona=HomeUser). This tool does not submit files automatically.
 
-## 常見問題
+## Troubleshooting
 
-| 情況 | 處理方式 |
+| Situation | What to do |
 | --- | --- |
-| 找不到必要檔案 | 依第一步的資料夾特徵重新確認，不要選到執行檔或下一層資料夾 |
-| 提示 XXMI 或遊戲已在執行 | 正常退出後再試；不要連續重複點擊 |
-| 提示缺少前置檢查會話 | 改用本版 GugaEFMI，不直接執行 `bridge`、原版啟動按鈕或原版 Quick Start |
-| 設定檢查不通過 | 依錯誤提示核對欄位，儲存並退出 XXMI 後，在原設定視窗按 Enter 重查 |
-| 官方啟動器未就緒 | 先完成官方登入或更新，再重試；不要自行修改程序權限或停用保護 |
-| 想再看一次設定命令 | 執行 `Instructions.cmd`；命令會依目前程式位置產生 |
-| 搬動了 GugaLauncher 資料夾 | 重新執行 Setup，更新 XXMI 命令並重新生成捷徑 |
-| 視窗顯示錯誤 | 保留完整訊息供排查；提供日誌前先遮蔽個人路徑與帳號資訊 |
+| Required files not found | Check the folder characteristics in step 1; do not select an executable or the wrong folder level |
+| XXMI or the game is already running | Exit normally before retrying; avoid repeated clicks |
+| Prerequisite check session is missing | Use this release's GugaEFMI, not `bridge` directly, the original launch button, or the original Quick Start |
+| Settings validation fails | Correct the reported fields, save and exit XXMI, then press Enter in the original setup window |
+| Official launcher is not ready | Complete official login or updates, then retry; do not alter process permissions or disable protection |
+| Need the setup command again | Run `Instructions.cmd`; it generates the command for the current program location |
+| GugaLauncher folder was moved | Run Setup again, update the XXMI command, and regenerate the shortcut |
+| An error appears | Retain the complete message; redact personal paths and account information before sharing logs |
 
-## 檔案用途與隱私
+## Files and privacy
 
-| 檔案／資料夾 | 用途 |
+| File or folder | Purpose |
 | --- | --- |
-| `Setup.cmd` | 首次設定、按 Enter 重查、生成捷徑 |
-| `GugaEFMI.lnk` | 設定成功後產生的日常啟動捷徑 |
-| `Start.cmd` | 相同協同流程的備用啟動入口 |
-| `Instructions.cmd` | 重新顯示設定指引與命令 |
-| `Check.cmd` | 只檢查，不啟動遊戲 |
-| `Offline-Tests.cmd` | 開發／排查使用的離線測試，不是啟動入口 |
-| `app/` | 程式及隨附 .NET Runtime；請整個保留 |
-| `src/` | C# 原始碼 |
-| `PACKAGE-MANIFEST.json` | 初始交付檔案的 SHA256 清單；不是數位簽章 |
-| `LICENSE`、`runtime-licenses/` | 授權與第三方聲明 |
+| `Setup.cmd` | Initial setup, Enter-to-recheck workflow, and shortcut generation |
+| `GugaEFMI.lnk` | Everyday shortcut generated after successful setup |
+| `Start.cmd` | Alternative entry point for the same coordinated workflow |
+| `Instructions.cmd` | Displays configuration instructions and the command again |
+| `Check.cmd` | Checks only; does not start the game |
+| `Offline-Tests.cmd` | Offline development/troubleshooting tests; not a launch entry point |
+| `app/` | Program and bundled .NET Runtime; retain the entire folder |
+| `src/` | C# source code |
+| `PACKAGE-MANIFEST.json` | SHA256 inventory of initial package files; not a digital signature |
+| `LICENSE`, `runtime-licenses/` | License and third-party notices |
 
-乾淨交付包不包含玩家路徑、帳號、mod、日誌或已設定的捷徑。首次設定後產生的 `app/settings.json`、設定備份、`app/local-errors.log` 與捷徑可能包含本機路徑，**分享時請使用原始交付 ZIP，不要直接壓縮已使用的資料夾**。
+The clean package contains no player paths, accounts, mods, logs, or configured shortcuts. Files created after setup, including `app/settings.json`, configuration backups, `app/local-errors.log`, and shortcuts, may contain local paths. **Share the original distribution ZIP, not a newly zipped copy of your used folder.**
 
-GugaLauncher 不搬移原版 Mods；原版 XXMI／EFMI 仍會依自身設定進行必要的設定保存與 mod 處理。
+GugaLauncher does not move the original Mods folder. The original XXMI/EFMI still performs its own necessary configuration saving and mod processing.
 
-## 適用範圍
+## Scope of validation
 
-協同啟動與注入流程已完成本機實測，使用者確認遊戲與 mod 正常。後續的視窗退出、設定提示與捷徑生成已做離線或隔離驗證；這不代表所有電腦、遊戲更新或 XXMI 版本均已驗收。
+The coordinated launch and injection workflow was tested locally, and the user confirmed that the game and mods worked. Subsequent window-exit behavior, setup prompts, and shortcut generation received offline or isolated checks. This does not mean every computer, game update, or XXMI version has been validated.
 
-本工具的防重複檢查只涵蓋自己的協同入口。原版 XXMI 的行為沒有被修改；直接使用其他入口，或在啟動途中同時從其他程式啟動遊戲，仍可能繞過檢查。啟動時請只使用一個入口。
-
+Duplicate-launch checks cover this tool's own coordinated entry point. The original XXMI behavior has not been modified. Other entry points, or launching the game from another program during startup, may bypass these checks. Use only one launch entry point at a time.

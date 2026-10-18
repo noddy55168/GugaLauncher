@@ -1,7 +1,7 @@
-目前玩家操作請以 README.md 為準；英文完整指南為 README.en.md，英文技術摘要為 README.en.txt。
+目前玩家操作請以 README.zh-TW.md 為準；英文完整指南為 README.en.md，英文技術摘要為 README.en.txt。
 以下保留歷史補充；其中手動以管理員啟動及 EFMI Quick Start.cmd 的舊說明不作為目前建議入口，請使用 GugaEFMI。主程式 GPLv3 與 runtime-licenses 的 .NET 第三方授權分別適用，未改用參考專案的 MIT 授權。
 
-玩家使用說明請先閱讀同資料夾的 README.md（已核准之發布說明）。本檔保留補充與歷程內容。
+玩家使用說明請先閱讀同資料夾的 README.zh-TW.md（已核准之發布說明）。本檔保留補充與歷程內容。
 
 簡易使用：Setup.cmd 輸入三個資料夾 → 依畫面設定 XXMI → 回原視窗按 Enter，修正直到 OK → 自動建立 GugaEFMI 捷徑 → 按任意鍵結束。
 日常遊玩：雙擊主資料夾的 GugaEFMI 捷徑（Start.cmd 為備用入口）。原版 XXMI 可管理設定，其啟動按鈕不支援本版前置保護。
