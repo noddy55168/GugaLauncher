@@ -1,0 +1,60 @@
+# .NET build output
+**/bin/
+**/obj/
+artifacts/
+TestResults/
+*.pdb
+
+# Local IDE settings
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+
+# Compiled application/runtime and player settings; keep only the blank template
+/app/*
+!/app/settings.template.json
+**/settings.json
+**/settings.*.json
+!app/settings.template.json
+**/XXMI Launcher Config.json
+
+# Generated shortcuts/icons, logs, and backups
+*.lnk
+/GugaEFMI.ico
+*.log
+*.bak
+*.backup
+*.tmp
+*.dmp
+[Bb]ackup*/
+[Ll]ogs/
+
+# Local secrets
+.env
+.env.*
+*.pfx
+*.p12
+*.key
+*.pem
+
+# Distribution archives and generated package inventory belong in Releases
+*.zip
+*.zip.sha256
+/PACKAGE-MANIFEST.json
+/publish/
+/dist/
+
+# External game/mod installations must not be committed
+/Mods/
+/XXMI Launcher/
+/EFMI/
+/GRYPHLINK/
+/Endfield_Data/
+
+# OS metadata
+Thumbs.db
+Desktop.ini
+.DS_Store
