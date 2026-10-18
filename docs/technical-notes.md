@@ -42,8 +42,8 @@ The existing [GPLv3 license](../LICENSE) remains unchanged. `Native.cs` and `Par
 
 ## Validation and privacy / 驗證與隱私
 
-Historical testing includes a successful local coordinated launch with working mods, 44 offline assertions, PowerShell syntax checks and isolated shortcut/window-handoff checks. These are historical results, not tests rerun by this documentation cleanup, and do not establish compatibility on every machine or future version.
+Offline tests cover simulated coordinator behavior and do not establish live-game compatibility. Verify game startup and mod display in the intended environment.
 
 Only the blank settings template is tracked. Player settings, logs, shortcuts, icons, build outputs and original local documentation records are excluded from Git. Distribute the clean release package, not a used installation folder. Package hashes detect changes but are not digital signatures.
 
-歷史紀錄包含成功啟動及 mod 顯示、44 項離線斷言、腳本語法及隔離捷徑／視窗交接檢查；不表示本次文件整理重跑了這些測試，也不保證其他環境或未來版本相容。Git 僅保留空白設定範本，本機設定、日誌、捷徑、圖示、建置產物與原始紀錄不提交。分享請使用乾淨 Release，雜湊不是數位簽章。
+離線測試涵蓋模擬協同行為，不代表實際遊戲相容性。請在使用環境確認遊戲啟動與 mod 顯示。Git 僅保留空白設定範本，本機設定、日誌、捷徑、圖示、建置產物與原始紀錄不提交。分享請使用乾淨 Release，雜湊不是數位簽章。

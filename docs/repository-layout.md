@@ -29,10 +29,6 @@ docs/
   technical-notes.md       Technical boundaries, provenance and validation scope
 ```
 
-The duplicate English README is consolidated into README.md. The duplicate EFMI Quick Start.cmd wrapper is consolidated into scripts/Start.cmd. The original XXMI shortcut is not part of this repository and is not modified.
-
-英文文件統一使用 README.md；重複的 EFMI Quick Start.cmd 合併為 scripts/Start.cmd。這不是修改玩家原版 XXMI 的 EFMI Quick Start 捷徑。
-
 ## Build / 建置
 
 Developers need the .NET 10 SDK on Windows x64. From the repository root:
@@ -55,9 +51,9 @@ After building, the offline tests can be run without starting the game:
 .\scripts\Offline-Tests.cmd
 ```
 
-Setup.cmd and scripts/Start.cmd are live user workflows, not offline tests. They are not run as part of this structural cleanup.
+Setup.cmd and scripts/Start.cmd are live user workflows, not offline tests.
 
-Setup.cmd 與 scripts/Start.cmd 是實際使用入口，不是離線測試；本次結構整理沒有執行它們。
+Setup.cmd 與 scripts/Start.cmd 是實際使用入口，不是離線測試。
 
 ## Path contract / 路徑規則
 
@@ -74,3 +70,9 @@ Setup.cmd 與 scripts/Start.cmd 是實際使用入口，不是離線測試；本
 See [technical notes](technical-notes.md) for the coordination flow, protection boundaries, license provenance and historical validation scope. User setup instructions are maintained only in the three language READMEs.
 
 協同流程、保護範圍、授權來源與歷史驗證摘要統一收納於[技術說明](technical-notes.md)。玩家操作步驟只維護於三語 README，避免重複或過時指引。
+
+## Missing executable / 缺少執行檔
+
+Setup and Quick Start check for app/GugaLauncher.exe before configuration or elevation. If absent, they explain how to obtain a complete Release ZIP or build the source. They do not download or build automatically.
+
+Setup 與 Quick Start 會在設定或提權前檢查 app/GugaLauncher.exe；缺少時說明下載完整 Release 或先建置原始碼，不會自動下載或建置。

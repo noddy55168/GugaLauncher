@@ -149,6 +149,6 @@ GugaLauncher does not move the original Mods folder. The original XXMI/EFMI stil
 
 ## Scope of validation
 
-The coordinated launch and injection workflow was tested locally, and the user confirmed that the game and mods worked. Subsequent window-exit behavior, setup prompts, and shortcut generation received offline or isolated checks. This does not mean every computer, game update, or XXMI version has been validated.
+Compatibility depends on the game, launcher, XXMI/EFMI, mods and system environment. Offline checks do not replace in-game verification. Compatibility with every computer or future version is not guaranteed.
 
 Duplicate-launch checks cover this tool's own coordinated entry point. The original XXMI behavior has not been modified. Other entry points, or launching the game from another program during startup, may bypass these checks. Use only one launch entry point at a time.
